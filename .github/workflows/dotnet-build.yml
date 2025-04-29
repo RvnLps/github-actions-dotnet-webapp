@@ -1,0 +1,36 @@
+name: .NET Scheduled Workflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 * * * *" # Executa a cada hora
+
+jobs:
+  buildapp:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Action pré-existente para fazer checkout do repositório
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Configuração do .NET
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    # Restaurar dependências
+    - name: Restore dependencies
+      run: dotnet restore **/*.csproj
+
+    # Compilar o projeto
+    - name: Build project
+      run: dotnet build **/*.csproj --no-restore
+
+    # Script personalizado para exibir uma mensagem de log
+    - name: Custom script
+      run: |
+        echo "Build completed successfully at $(date)"
