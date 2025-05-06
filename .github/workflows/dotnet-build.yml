@@ -14,11 +14,11 @@ jobs:
     steps:
     # Action pré-existente para fazer checkout do repositório
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     # Configuração do .NET
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
 
